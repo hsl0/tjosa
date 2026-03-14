@@ -17,7 +17,21 @@ permissions:
   contents: read
 
 jobs:
+  flake8:
+    uses: .github/workflows/flake8.yml
+
+  pylint:
+    uses: .github/workflows/pylint.yml
+
+  pytest:
+    uses: .github/workflows/pytest.yml
+
   release-build:
+    needs:
+      - flake8
+      - pylint
+      - pytest  
+
     runs-on: ubuntu-latest
 
     steps:
