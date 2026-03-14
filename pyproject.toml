@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=69", "wheel"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling>=1.29.0,<2"]
+build-backend = "hatchling.build"
 
 [project]
 name = "tjosa"
@@ -8,15 +8,22 @@ version = "0.1.0"
 description = "t-string을 지원하는 Python 한국어 조사 처리 라이브러리"
 readme = "README.md"
 requires-python = ">=3.14"
-license = { text = "MIT" }
-authors = [{ name = "hsl0" }]
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "hsl0", email = "hsl0@outlook.kr" }]
+keywords = ["t-string", "korean", "josa", "tossi"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.14",
-  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
 ]
 dependencies = []
+
+[project.urls]
+Repository = "https://github.com/hsl0/tjosa.git"
+Issues = "https://github.com/hsl0/tjosa/issues"
+Changelog = "https://github.com/hsl0/tjosa/releases"
+
 
 [project.optional-dependencies]
 dev = [
@@ -25,13 +32,22 @@ dev = [
   "pylint>=3.3.0",
 ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["tjosa.py"]
+include = ["tjosa.py", "README.md", "LICENSE"]
+
+[tool.hatch.build.targets.sdist]
+include = ["tjosa.py", "README.md", "LICENSE"]
+
+
 [tool.pytest.ini_options]
 testpaths = ["test", "tjosa.py"]
 python_files = ["*.py"]
 addopts = "--doctest-modules"
-markers =
-	replace: 전체 문장 변환 함수
-	select: 단일 단어 조사 판별 함수
+markers = [
+	"replace: 전체 문장 변환 함수",
+	"select: 단일 단어 조사 판별 함수"
+]
 
 [tool.pylint.main]
 py-version = "3.14"
