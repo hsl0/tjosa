@@ -5,6 +5,8 @@ py -m pytest test/perftest.py --benchmark-only
 출처: https://github.com/kimsehwan96/pyjosa/blob/master/performance_test.py (MIT 라이선스)
 '''
 
+# pylint: disable=import-outside-toplevel
+
 import pytest
 
 word_list = ["오리", "예나", "세환", "철수", "길동", "우주"]
@@ -23,6 +25,8 @@ josa_answer = {
 
 @pytest.mark.replace
 def test_tjosa_josa(benchmark):
+    '''tjosa.josa 테스트'''
+
     from tjosa import josa
 
     def run():
@@ -36,6 +40,8 @@ def test_tjosa_josa(benchmark):
 
 @pytest.mark.select
 def test_tjosa_josa_only(benchmark):
+    '''tjosa.josa_only 테스트'''
+
     from tjosa import josa_only
 
     def run():
@@ -49,6 +55,7 @@ def test_tjosa_josa_only(benchmark):
 
 @pytest.mark.select
 def test_kimsewhan96_pyjosa_get_josa(benchmark):
+    '''kimsewhan96/pyjosa.get_josa 테스트'''
     from pyjosa.josa import Josa
 
     def run():
@@ -57,11 +64,13 @@ def test_kimsewhan96_pyjosa_get_josa(benchmark):
             assert Josa.get_josa(word, "가") == josa_answer['이가'][word]
             assert Josa.get_josa(word, "와") == josa_answer['과와'][word]
             assert Josa.get_josa(word, "를") == josa_answer['을를'][word]
-    
+
     benchmark(run)
 
 @pytest.mark.select
 def test_kss_select_josa(benchmark):
+    '''kss.select_josa 테스트'''
+
     from kss import Kss
 
     select_josa = Kss("select_josa")
@@ -77,6 +86,8 @@ def test_kss_select_josa(benchmark):
 
 @pytest.mark.select
 def test_tossi_pick(benchmark):
+    '''tossi.pick 테스트'''
+
     import tossi
 
     def run():
@@ -88,7 +99,10 @@ def test_tossi_pick(benchmark):
 
     benchmark(run)
 
+# pylint: disable=invalid-name
 def myevan_pyjosa():
+    '''myevan/pyjosa 모듈 생성'''
+
     import re
 
     JOSA_PAIRD = {
@@ -148,11 +162,14 @@ def myevan_pyjosa():
 
         tokens.append(src[base_index:])
         return "".join(tokens)
-    
+
     return {'choose_josa': choose_josa, 'replace_josa': replace_josa}
+# pylint: enable=invalid-name
 
 @pytest.mark.replace
 def test_myevan_pyjosa_replace_josa(benchmark):
+    '''myevan/pyjosa.replcae_josa 테스트'''
+
     replace_josa = myevan_pyjosa()['replace_josa']
 
     def run():
