@@ -42,8 +42,8 @@ include = ["tjosa.py", "README.md", "LICENSE"]
 
 [tool.pytest.ini_options]
 testpaths = ["test", "tjosa.py"]
-python_files = ["*.py"]
-addopts = "--doctest-modules"
+python_files = ["*.py", "!perftest.py"]
+addopts = "--doctest-modules --ignore=test/perftest.py"
 markers = [
 	"replace: 전체 문장 변환 함수",
 	"select: 단일 단어 조사 판별 함수"
@@ -51,6 +51,7 @@ markers = [
 
 [tool.pylint.main]
 py-version = "3.14"
+ignore = ["test/perftest.py"]
 
 [tool.pylint.format]
 max-line-length = 100
