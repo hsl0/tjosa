@@ -3,6 +3,9 @@
 
 name: Check python package with flake8
 
+permissions:
+  contents: read
+
 on:
   push:
     paths:
