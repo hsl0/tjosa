@@ -18,13 +18,13 @@ permissions:
 
 jobs:
   flake8:
-    uses: .github/workflows/flake8.yml
+    uses: ./.github/workflows/flake8.yml
 
   pylint:
-    uses: .github/workflows/pylint.yml
+    uses: ./.github/workflows/pylint.yml
 
   pytest:
-    uses: .github/workflows/pytest.yml
+    uses: ./.github/workflows/pytest.yml
 
   release-build:
     needs:
