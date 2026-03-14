@@ -71,6 +71,24 @@ print(josa(t"{food}는 맛있다"))   # 파인애플은 맛있다
 - `josa_only("집", "은")` -> `은`
 - `josa_only("학교", "으로")` -> `로`
 
+## 성능 비교 (Performance)
+
+`tjosa`는 한 단어 조사 선택(`josa_only`)과 문장 전체 문자열 변환(`josa`) 사용 방식 모두에서 유사 라이브러리 대비 빠른 성능을 보입니다.
+
+동일 환경에서 유사 라이브러리와 함께 벤치마크를 측정한 결과는 다음과 같습니다.
+
+- 한 단어 조사 선택
+  - hsl0/tjosa.josa_only: 평균 **8.9497μs**
+  - [kimsehwan96/pyjosa](github.com/kimsehwan96/pyjosa).get_josa: 평균 **26.0833μs**
+  - hsl0/tjosa.josa_only가 약 **65.69%** 더 빠름
+
+- 문장 전체 조사 변환
+  - hsl0/tjosa.josa: 평균 **32.1564μs**
+  - [myevan/pyjosa](github.com/myevan/pyjosa).replace_josa: 평균 **37.2463μs**
+  - hsl0/josa가 약 **13.67%** 더 빠름
+
+자세한 사항은 [docs/benchmark.md](./docs/benchmark.md) 문서를 참고해 주세요.
+
 ## 라이선스 (License)
 
 MIT (예정)
