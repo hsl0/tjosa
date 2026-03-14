@@ -140,18 +140,30 @@ def josa_only(eogan: str, josa: DefinedJosa | Josa) -> str:
 
         >>> josa_only('지민', '이')
         '이'
+
+        >>> josa_only('철수', '이는')
+        '는'
+
+        >>> josa_only('지민', '이는')
+        '이는'
     """
+
+    t = ""  # 이어지는 글자
 
     if josa in default_josas:
         # 사전 정의된 유효한 조사를 선택한 경우
         j = default_josas[josa]
+    elif isinstance(josa, str) and josa[0] in default_josas:
+        # 사전 정의된 유효한 조사로 시작하는 경우
+        j = default_josas[josa[0]]
+        t = josa[1:]
     elif isinstance(josa, tuple) or isinstance(josa, str) and len(josa) == 2:
         # 사용자 지정 조사 매핑을 입력한 경우
         j = josa
     else:
         raise TypeError(f"{josa}(은)는 유효한 조사가 아닙니다")
 
-    return josa_core(eogan, j)
+    return josa_core(eogan, j) + t
 
 
 def josa(
