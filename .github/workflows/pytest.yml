@@ -14,11 +14,10 @@ on:
       - "*.py"
       - test/*.py
       - .github/workflows/pytest.yml
-
+  workflow_call:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:

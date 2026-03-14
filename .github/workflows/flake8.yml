@@ -14,6 +14,7 @@ on:
       - "*.py"
       - test/*.py
       - .github/workflows/flake8.yml
+  workflow_call:
 
 jobs:
   build:
