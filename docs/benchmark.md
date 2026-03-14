@@ -65,7 +65,7 @@
 
 ---
 
-### 3.2 Select 그룹
+### Select 그룹
 
 | 테스트 | Mean(avg) μs | Run variation μs | Range (min~max) μs |
 |---|---:|---:|---:|
