@@ -2,7 +2,7 @@
 t-string을 통해 삽입한 값의 조사를 자동으로 인식해 변환하는 기능을 지원합니다.
 """
 
-from string import Template
+from string.templatelib import Template
 from typing import Literal, Sequence
 
 # export 대상 함수 목록
