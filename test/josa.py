@@ -8,6 +8,7 @@ def test_english():
     assert josa(t'{"Test"}이 진행 중입니다.') == 'Test이(가) 진행 중입니다.'
     assert josa(t'현재 상태는 {"Testing"}이다.') == '현재 상태는 Testing(이)다.'
 
+
 def test_custom_josas():
     '''사용자 지정 조사 사용 테스트'''
     custom_josas = [('있', '없')]

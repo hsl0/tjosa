@@ -2,7 +2,8 @@
 
 py -m pytest test/perftest.py --benchmark-only
 
-출처: https://github.com/kimsehwan96/pyjosa/blob/master/performance_test.py (MIT 라이선스)
+출처: kimsehwan96/pyjosa (MIT 라이선스)
+     https://github.com/kimsehwan96/pyjosa/blob/master/performance_test.py
 '''
 
 # pylint: disable=import-outside-toplevel
@@ -17,11 +18,12 @@ possible_results = {
     '을를': ['오리를', '예나를', '세환을', '철수를', '길동을', '우주를']
 }
 josa_answer = {
-    '은는': {'오리':'는', '예나':'는', '세환':'은', '철수':'는', '길동':'은', '우주':'는'},
-    '이가': {'오리':'가', '예나':'가', '세환':'이', '철수':'가', '길동':'이', '우주':'가'},
-    '과와': {'오리':'와', '예나':'와', '세환':'과', '철수':'와', '길동':'과', '우주':'와'},
-    '을를': {'오리':'를', '예나':'를', '세환':'을', '철수':'를', '길동':'을', '우주':'를'},
+    '은는': {'오리': '는', '예나': '는', '세환': '은', '철수': '는', '길동': '은', '우주': '는'},
+    '이가': {'오리': '가', '예나': '가', '세환': '이', '철수': '가', '길동': '이', '우주': '가'},
+    '과와': {'오리': '와', '예나': '와', '세환': '과', '철수': '와', '길동': '과', '우주': '와'},
+    '을를': {'오리': '를', '예나': '를', '세환': '을', '철수': '를', '길동': '을', '우주': '를'},
 }
+
 
 @pytest.mark.replace
 def test_tjosa_josa(benchmark):
@@ -38,6 +40,7 @@ def test_tjosa_josa(benchmark):
 
     benchmark(run)
 
+
 @pytest.mark.select
 def test_tjosa_josa_only(benchmark):
     '''tjosa.josa_only 테스트'''
@@ -53,6 +56,7 @@ def test_tjosa_josa_only(benchmark):
 
     benchmark(run)
 
+
 @pytest.mark.select
 def test_kimsewhan96_pyjosa_get_josa(benchmark):
     '''kimsewhan96/pyjosa.get_josa 테스트'''
@@ -66,6 +70,7 @@ def test_kimsewhan96_pyjosa_get_josa(benchmark):
             assert Josa.get_josa(word, "를") == josa_answer['을를'][word]
 
     benchmark(run)
+
 
 @pytest.mark.select
 def test_kss_select_josa(benchmark):
@@ -84,6 +89,7 @@ def test_kss_select_josa(benchmark):
 
     benchmark(run)
 
+
 @pytest.mark.select
 def test_tossi_pick(benchmark):
     '''tossi.pick 테스트'''
@@ -100,6 +106,8 @@ def test_tossi_pick(benchmark):
     benchmark(run)
 
 # pylint: disable=invalid-name
+
+
 def myevan_pyjosa():
     '''myevan/pyjosa 모듈 생성'''
 
@@ -151,12 +159,13 @@ def myevan_pyjosa():
         tokens = []
         base_index = 0
         for mo in JOSA_REGEX.finditer(src):
-            prev_token = src[base_index : mo.start()]
+            prev_token = src[base_index: mo.start()]
             prev_char = prev_token[-1]
             tokens.append(prev_token)
 
             josa_key = mo.group()
-            tokens.append(choose_josa(prev_char, josa_key, JOSA_PAIRD[josa_key]))
+            tokens.append(choose_josa(
+                prev_char, josa_key, JOSA_PAIRD[josa_key]))
 
             base_index = mo.end()
 
@@ -165,6 +174,7 @@ def myevan_pyjosa():
 
     return {'choose_josa': choose_josa, 'replace_josa': replace_josa}
 # pylint: enable=invalid-name
+
 
 @pytest.mark.replace
 def test_myevan_pyjosa_replace_josa(benchmark):
