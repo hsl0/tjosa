@@ -60,3 +60,7 @@ max-line-length = 100
 disable = [
   "no-else-return"
 ]
+
+[tool.flake8]
+filename = "*.py, test/*.py"
+exclude = ".*/**"
