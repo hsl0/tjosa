@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tjosa"
+version = "0.1.0"
+description = "t-string의 한국어 조사를 어간에 맞게 자동 변환하는 라이브러리"
+readme = "README.md"
+requires-python = ">=3.14"
+license = { text = "MIT" }
+authors = [{ name = "hsl0" }]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.14",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9,<10",
+  "pytest-cov>=7,<8",
+  "pylint>=3.3",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["test", "tjosa.py"]
+python_files = ["*.py"]
+addopts = "--doctest-modules"
+
+[tool.pylint.main]
+py-version = "3.14"
+
+[tool.pylint.format]
+max-line-length = 100
