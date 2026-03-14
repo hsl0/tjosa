@@ -13,6 +13,9 @@ on:
       - .github/workflows/pylint.yml
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest

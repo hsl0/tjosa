@@ -16,9 +16,11 @@ on:
       - .github/workflows/flake8.yml
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
