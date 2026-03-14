@@ -53,7 +53,7 @@ markers = [
 
 [tool.pylint.main]
 py-version = "3.14"
-ignore = ["test/perftest.py"]
+ignore = ["perftest.py"]
 
 [tool.pylint.format]
 max-line-length = 100
