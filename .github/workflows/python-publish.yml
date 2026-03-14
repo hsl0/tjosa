@@ -78,6 +78,7 @@ jobs:
       # url: https://pypi.org/project/YOURPROJECT/${{ github.event.release.name }}
 
     steps:
+      - uses: actions/checkout@v4
 
       - name: Download release assets
         run: |
