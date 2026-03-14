@@ -3,12 +3,14 @@ name: Pylint
 on:
   push:
     paths:
-      - *.py
+      - "*.py"
       - test/*.py
+      - .github/workflows/pylint.yml
   pull_request:
     paths:
-      - *.py
+      - "*.py"
       - test/*.py
+      - .github/workflows/pylint.yml
 
 jobs:
   build:
