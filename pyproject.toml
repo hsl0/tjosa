@@ -24,7 +24,6 @@ Repository = "https://github.com/hsl0/tjosa.git"
 Issues = "https://github.com/hsl0/tjosa/issues"
 Changelog = "https://github.com/hsl0/tjosa/releases"
 
-
 [project.optional-dependencies]
 dev = [
   "pytest>=9.0.0,<10",
