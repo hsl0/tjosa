@@ -103,7 +103,7 @@ def myevan_pyjosa():
     }
 
     JOSA_REGEX = re.compile(
-        "\(이\)가|\(와\)과|\(을\)를|\(은\)는|\(아\)야|\(이\)여|\(으\)로|\(이\)라"
+        r"\(이\)가|\(와\)과|\(을\)를|\(은\)는|\(아\)야|\(이\)여|\(으\)로|\(이\)라"
     )
 
     def choose_josa(prev_char, josa_key, josa_pair):
