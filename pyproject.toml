@@ -35,15 +35,15 @@ dev = [
 source = "vcs"
 
 [tool.hatch.build.targets.wheel]
-packages = ["tjosa.py"]
-include = ["tjosa.py", "README.md", "LICENSE"]
+packages = ["tjosa"]
+include = ["tjosa", "README.md", "LICENSE"]
 
 [tool.hatch.build.targets.sdist]
-include = ["tjosa.py", "README.md", "LICENSE"]
+include = ["tjosa", "README.md", "LICENSE"]
 
 
 [tool.pytest.ini_options]
-testpaths = ["test", "tjosa.py"]
+testpaths = ["test", "tjosa"]
 python_files = ["*.py", "!perftest.py"]
 addopts = "--doctest-modules --ignore=test/perftest.py"
 markers = [
@@ -64,5 +64,5 @@ disable = [
 ]
 
 [tool.flake8]
-filename = "*.py, test/*.py"
+filename = "*.py, tjosa/*.py, test/*.py"
 exclude = ".*/**"
