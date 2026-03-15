@@ -1,7 +1,9 @@
+"""공통 로직 모듈"""
+
 from .types import Josa
 
 
-def josa_core(eogan: str, josa_tuple: Josa) -> str:
+def josa_core[T: str, U: str](eogan: str, josa_tuple: Josa[T, U]) -> T | U | str:
     """어간과 조사 튜플을 받아 어간에 맞는 조사를 선택합니다."""
 
     elc = ord(eogan[-1])  # 마지막 자모 코드

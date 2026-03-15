@@ -1,8 +1,12 @@
+"""선택적 유틸리티 함수 모음"""
+
 from typing import Sequence
 from .types import Josa
 
 
-def create_josa_dict(josas: Sequence[Josa]) -> dict[str, Josa]:
+def create_josa_dict[T: str, U: str = T](
+    josas: Sequence[Josa[T, U]],
+) -> dict[T | U, Josa[T, U]]:
     """조사 튜플의 모든 조사를 dict 형태로 매핑"""
     return {
         j: josa for josa in josas for j in josa if j

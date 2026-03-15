@@ -1,9 +1,14 @@
+"""josa_only 함수 모듈"""
+
+from typing import cast
 from .josas import default_josas, DefinedJosa
-from .types import Josa
 from .core import josa_core
+from .types import Josa
 
 
-def josa_only(eogan: str, josa: DefinedJosa | Josa) -> str:
+def josa_only[T: str, U: str](
+    eogan: str, josa: DefinedJosa | Josa[T, U]
+) -> T | U | str:
     """어간과 조사를 입력해서 어간에 맞는 조사를 반환합니다.
 
     '이' 조사는 생략 또는 '이'를 반환하므로, 이/가가 필요한 경우 '이' 대신에 '가'를 사용해 주세요.
@@ -80,6 +85,7 @@ def josa_only(eogan: str, josa: DefinedJosa | Josa) -> str:
     """
 
     t = ""  # 이어지는 글자
+    j: Josa[T, U] | Josa[DefinedJosa]  # 조사 튜플
 
     if josa in default_josas:
         # 사전 정의된 유효한 조사를 선택한 경우
@@ -90,8 +96,8 @@ def josa_only(eogan: str, josa: DefinedJosa | Josa) -> str:
         t = josa[1:]
     elif isinstance(josa, tuple) or isinstance(josa, str) and len(josa) == 2:
         # 사용자 지정 조사 매핑을 입력한 경우
-        j = josa
+        j = cast(Josa[T, U], josa)
     else:
-        raise TypeError(f"{josa}(은)는 유효한 조사가 아닙니다")
+        raise TypeError(f"{josa_only(josa, '는')} 유효한 조사가 아닙니다")
 
     return josa_core(eogan, j) + t

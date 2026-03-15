@@ -1,16 +1,28 @@
-from .core import josa_core
-from .josas import default_josas, DefinedJosa
-from .types import Josa
-from .utils import create_josa_dict
+"""josa 함수 모듈
+
+Python 3.14 이상 필요
+"""
+
+from sys import version_info
+
+if version_info.major < 3 or version_info.minor < 14:
+    raise ImportError(
+        f"t-string을 사용하는 josa() 함수는 Python 3.14 이상 버전이 필요합니다. 현재 Python 버전은 {version_info.major}.{version_info.minor} 입니다."
+    )
+
 from string.templatelib import Template
-from typing import Sequence
+from typing import Sequence, Optional, cast
+from .core import josa_core
+from .types import Josa
+from .josas import default_josas, DefinedJosa
+from .utils import create_josa_dict
 
 
-def josa(
+def josa[T: str, U: str](
     template: Template,
     *,
-    custom_josas: Sequence[Josa] = None,
-    unused_josas: Sequence[DefinedJosa] = None,
+    custom_josas: Optional[Sequence[Josa[T, U]]] = None,
+    unused_josas: Optional[Sequence[DefinedJosa]] = None,
 ) -> str:
     """템플릿 문자열에서 삽입되는 값에 맞게 조사를 변환합니다.
 
@@ -88,10 +100,13 @@ def josa(
         '지민이는 내 친구'
     """
 
-    josas = (
-        default_josas
-        if not custom_josas
-        else default_josas | create_josa_dict(custom_josas)
+    josas = cast(
+        dict[T | U | DefinedJosa, Josa[T, U] | Josa[DefinedJosa]],
+        (
+            default_josas
+            if not custom_josas
+            else default_josas | create_josa_dict(custom_josas)
+        ),
     )
 
     if unused_josas:
@@ -109,10 +124,10 @@ def josa(
         j = ""  # 인식된 조사
 
         if t[0:2] in josas:  # 두글자 조사 우선
-            j = josas[t[0:2]]
+            j = josas[cast(T | U | DefinedJosa, t[0:2])]
             t = t[2:]
         elif t[0:1] in josas:
-            j = josas[t[0]]
+            j = josas[cast(T | U | DefinedJosa, t[0])]
             t = t[1:]
         else:  # 조사가 아니면 그냥 연결
             fragments.append(e + t)
