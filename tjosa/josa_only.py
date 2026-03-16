@@ -1,29 +1,32 @@
 """josa_only 함수 모듈"""
 
-from typing import cast
-from .josas import default_josas, DefinedJosa
-from .core import josa_core
-from .types import Josa
+from .mappings import josa_map, BuiltinJosa, ConversionMap
+from .rules import ConversionRule
+from .formatter import FallbackFormatter, format_fallback
 
 
-def josa_only[T: str, U: str](
-    eogan: str, josa: DefinedJosa | Josa[T, U]
-) -> T | U | str:
-    """어간과 조사를 입력해서 어간에 맞는 조사를 반환합니다.
+def josa_only[C: str, K: str, F: str](
+    cheon: str,
+    josa: K | ConversionRule[C],
+    *,
+    fallback_formatter: FallbackFormatter[F] = format_fallback,
+    conversion_rules: ConversionMap[K] = josa_map,
+) -> str:
+    """체언과 조사를 입력해서 체언에 맞는 조사를 반환합니다.
 
     '이' 조사는 생략 또는 '이'를 반환하므로, 이/가가 필요한 경우 '이' 대신에 '가'를 사용해 주세요.
 
-    조사는 다음 중 하나를 선택하거나, (받침 있음, 받침 없음)을 매핑한 사용자 지정 조사 튜플을 입력할 수 있습니다.
+    조사는 다음 중 하나를 선택하거나, ConversionRule 객체를 입력할 수 있습니다.
 
     사용 가능 조사:
         은, 는, 이, 가, 을, 를, 과, 와, 으로, 로, 아, 야
 
     Args:
-        eogan (str): 어간
-        josa (Josa | DefinedJosa): 조사
+        cheon (str): 체언
+        josa (ConversionRule | BuiltinJosa): 조사
 
     Returns:
-        str: 어간에 맞게 변환된 조사
+        str: 체언에 맞게 변환된 조사
 
     Raises:
         TypeError: josa에 유효한 조사가 아닌 다른 문자열을 입력했을 때 발생합니다.
@@ -84,20 +87,20 @@ def josa_only[T: str, U: str](
         '이는'
     """
 
-    t = ""  # 이어지는 글자
-    j: Josa[T, U] | Josa[DefinedJosa]  # 조사 튜플
+    tail = ""  # 이어지는 글자
+    rule: ConversionRule[C] | ConversionRule[BuiltinJosa]  # 조사 튜플
 
-    if josa in default_josas:
+    if josa in conversion_rules:
         # 사전 정의된 유효한 조사를 선택한 경우
-        j = default_josas[josa]
-    elif isinstance(josa, str) and josa[0] in default_josas:
+        rule = conversion_rules[josa]  # type: ignore
+    elif isinstance(josa, str) and josa[0] in conversion_rules:
         # 사전 정의된 유효한 조사로 시작하는 경우
-        j = default_josas[josa[0]]
-        t = josa[1:]
-    elif isinstance(josa, tuple) or isinstance(josa, str) and len(josa) == 2:
+        rule = conversion_rules[josa[0]]  # type: ignore
+        tail = josa[1:]
+    elif isinstance(josa, ConversionRule):
         # 사용자 지정 조사 매핑을 입력한 경우
-        j = cast(Josa[T, U], josa)
+        rule = josa
     else:
-        raise TypeError(f"{josa_only(josa, '는')} 유효한 조사가 아닙니다")
+        raise TypeError(f"{josa_only(str(josa), '는')} 유효한 조사가 아닙니다")
 
-    return josa_core(eogan, j) + t
+    return rule.choose(cheon, fallback_formatter=fallback_formatter) + tail

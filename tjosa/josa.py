@@ -12,25 +12,23 @@ if version_info.major != 3 or version_info.minor < 14:
     )
 
 from string.templatelib import Template
-from typing import Sequence, Optional, cast
-from .core import josa_core
-from .types import Josa
-from .josas import default_josas, DefinedJosa
-from .utils import create_josa_dict
+from .rules import ConversionRule
+from .formatter import FallbackFormatter, format_fallback
+from .mappings import ConversionMap, josa_map
 
 
-def josa[T: str, U: str](
+def josa[T: str, F: str](
     template: Template,
     *,
-    custom_josas: Optional[Sequence[Josa[T, U]]] = None,
-    unused_josas: Optional[Sequence[DefinedJosa]] = None,
+    conversion_rules: ConversionMap[T] = josa_map,
+    fallback_formatter: FallbackFormatter[F] = format_fallback,
 ) -> str:
     """템플릿 문자열에서 삽입되는 값에 맞게 조사를 변환합니다.
 
     Args:
         template (Template): 템플릿 문자열 (t-string)
-        custom_josas (Sequence[Josa]): 사용자 지정 조사 튜플들
-        unused_josas (Sequence[DefinedJosa]): 변환 대상에서 제외할 기본 조사들
+        conversion_rules (dict[T, ConversionRule[T]]): 사용자 지정 변환 규칙
+        fallback_formatter (FallbackFormatter[U]): 판정 불가 시 폴백 포맷터 함수
 
     Returns:
         str: 조사를 변환한 문자열
@@ -101,41 +99,30 @@ def josa[T: str, U: str](
         '지민이는 내 친구'
     """
 
-    josas = cast(
-        dict[T | U | DefinedJosa, Josa[T, U] | Josa[DefinedJosa]],
-        (
-            default_josas
-            if not custom_josas
-            else default_josas | create_josa_dict(custom_josas)
-        ),
-    )
-
-    if unused_josas:
-        if josas is default_josas:
-            josas = josas.copy()
-
-        for jname in unused_josas:
-            del josas[jname]
-
     fragments = [template.strings[0]]  # 완성된 문자열
 
-    # e = 삽입된 어간
-    # t = 어간 뒷부분
-    for e, t in zip(template.values, template.strings[1:], strict=True):
-        j = ""  # 인식된 조사
+    # cheon = 삽입된 체언
+    # tail = 체언 뒷부분
+    for cheon, tail in zip(template.values, template.strings[1:], strict=True):
+        key: T
+        rule: ConversionRule[T]  # 인식된 조사
 
-        if t[0:2] in josas:  # 두글자 조사 우선
-            j = josas[cast(T | U | DefinedJosa, t[0:2])]
-            t = t[2:]
-        elif t[0:1] in josas:
-            j = josas[cast(T | U | DefinedJosa, t[0])]
-            t = t[1:]
+        if tail[0:2] in conversion_rules:  # 두글자 조사 우선
+            key = tail[0:2]  # type: ignore
+            rule = conversion_rules[key]
+            tail = tail[2:]
+        elif tail[0:1] in conversion_rules:
+            key = tail[0]  # type: ignore
+            rule = conversion_rules[key]
+            tail = tail[1:]
         else:  # 조사가 아니면 그냥 연결
-            fragments.append(e + t)
+            fragments.append(cheon + tail)
             continue
 
-        jor = josa_core(e, j)  # 변환된 조사
-        t = jor + t
-        fragments.append(e + t)
+        normalized_josa = rule.choose(
+            cheon, fallback_formatter=fallback_formatter
+        )  # 변환된 조사
+        tail = normalized_josa + tail
+        fragments.append(cheon + tail)
 
     return "".join(fragments)
