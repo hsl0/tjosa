@@ -7,7 +7,7 @@ name = "tjosa"
 dynamic = ["version"]
 description = "t-string을 지원하는 Python 한국어 조사 처리 라이브러리"
 readme = "README.md"
-requires-python = ">=3.14"
+requires-python = ">=3.12"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "hsl0", email = "hsl0@outlook.kr" }]
@@ -52,7 +52,7 @@ markers = [
 ]
 
 [tool.pylint.main]
-py-version = "3.14"
+py-version = "3.13"
 ignore = ["perftest.py"]
 
 [tool.pylint.format]

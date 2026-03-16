@@ -4,7 +4,7 @@ from typing import Sequence
 from .types import Josa
 
 
-def create_josa_dict[T: str, U: str = T](
+def create_josa_dict[T: str, U: str](
     josas: Sequence[Josa[T, U]],
 ) -> dict[T | U, Josa[T, U]]:
     """조사 튜플의 모든 조사를 dict 형태로 매핑"""

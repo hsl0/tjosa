@@ -5,9 +5,10 @@ Python 3.14 이상 필요
 
 from sys import version_info
 
-if version_info.major < 3 or version_info.minor < 14:
+if version_info.major != 3 or version_info.minor < 14:
     raise ImportError(
-        f"t-string을 사용하는 josa() 함수는 Python 3.14 이상 버전이 필요합니다. 현재 Python 버전은 {version_info.major}.{version_info.minor} 입니다."
+        f"t-string을 사용하는 josa() 함수는 Python 3.14 이상 버전이 필요합니다. \
+            현재 Python 버전은 {version_info.major}.{version_info.minor} 입니다."
     )
 
 from string.templatelib import Template
