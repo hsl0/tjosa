@@ -1,6 +1,6 @@
 from typing import Literal, Iterable
 from ..rules import JongsungRule, JongsungExceptRieulRule, ConversionRule
-from .ConversionMap import create_conversion_map
+from .ConversionMap import ConversionMap
 
 __all__ = ["josa_map", "josa_rules", "BuiltinJosa"]
 
@@ -47,4 +47,4 @@ josa_rules: Iterable[ConversionRule[BuiltinJosa]] = [  # (받침 있음, 받침 
     JongsungRule[Literal["이", ""]]("이", ""),  # type: ignore
 ]
 
-josa_map = create_conversion_map(josa_rules)
+josa_map = ConversionMap(josa_rules)

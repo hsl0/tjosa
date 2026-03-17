@@ -3,17 +3,16 @@
 from typing import Iterable
 from ..rules import ConversionRule
 
-__all__ = ["create_conversion_map", "ConversionMap"]
-
-type ConversionMap[T: str] = dict[T, ConversionRule[T]]
+__all__ = ["ConversionMap"]
 
 
-def create_conversion_map[T: str](
-    rules: Iterable[ConversionRule[T]],
-) -> ConversionMap[T]:
-    return {
-        candidate: rule  # ConversionRule 객체의 각 후보를 dict 키로, 객체를 값으로 할당.
-        for rule in rules
-        for candidate in rule.get_candidates()
-        if candidate  # 단, 빈 문자열인 후보는 키로 할당하지 않음
-    }
+class ConversionMap[T: str](dict[T, ConversionRule[T]]):
+    def __init__(self, rules: Iterable[ConversionRule[T]]):
+        super().__init__(
+            {
+                candidate: rule  # ConversionRule 객체의 각 후보를 dict 키로, 객체를 값으로 할당.
+                for rule in rules
+                for candidate in rule.get_candidates()
+                if candidate  # 단, 빈 문자열인 후보는 키로 할당하지 않음
+            }
+        )
