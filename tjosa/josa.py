@@ -66,21 +66,18 @@ def josa[T: str, F: str](
         >>> josa(t'{drink}를 마신다')
         '콜라를 마신다'
 
-        >>> tools = ('책', '펜')
+        >>> tools = ('책', '깃펜')
         >>> josa(t'{tools[0]}과 {tools[1]}')
-        '책과 펜'
+        '책과 깃펜'
 
         >>> tools = ('컴퓨터', '마우스')
         >>> josa(t'{tools[0]}과 {tools[1]}')
         '컴퓨터와 마우스'
 
-        >>> destination = '학교'
-        >>> josa(t'{destination}으로 간다')
-        '학교로 간다'
-
-        >>> destination = '집'
-        >>> josa(t'{destination}으로 간다')
-        '집으로 간다'
+        >>> horse = '제주'
+        >>> human = '서울'
+        >>> josa(t'말은 {horse}로, 사람은 {human}으로')
+        '말은 제주로, 사람은 서울로'
 
         >>> friend = '철수'
         >>> josa(t'{friend}야 안녕')

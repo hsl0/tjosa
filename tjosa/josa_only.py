@@ -62,10 +62,13 @@ def josa_only[C: str, K: str, F: str](
         >>> josa_only('컴퓨터', '과')
         '와'
 
-        >>> josa_only('학교', '으로')
+        >>> josa_only('제주', '으로')
         '로'
 
-        >>> josa_only('집', '으로')
+        >>> josa_only('서울', '으로')
+        '로'
+
+        >>> josa_only('한양', '으로')
         '으로'
 
         >>> josa_only('철수', '야')
