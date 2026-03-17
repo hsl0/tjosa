@@ -24,7 +24,6 @@ josa_answer = {
     '을를': {'오리': '를', '예나': '를', '세환': '을', '철수': '를', '길동': '을', '우주': '를'},
 }
 
-
 @pytest.mark.replace
 def test_tjosa_josa(benchmark):
     '''tjosa.josa 테스트'''
