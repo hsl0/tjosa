@@ -12,7 +12,7 @@ class JongsungExceptRieulRule[T: str](JongsungRule[T]):
 
         if result is True:
             elc = ord(word[-1])
-            if elc == 0x11AF or (0xAC00 <= elc <= 0xD7A3 and elc % 28 == 8):
+            if elc == 0x11AF or (0xAC00 <= elc <= 0xD7A3 and (elc - 0xAC00) % 28 == 8):
                 result = False
 
         match result:
