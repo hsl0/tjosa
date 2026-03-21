@@ -185,6 +185,10 @@ josa(t'{word}는 좋다.', fallback_formatter=custom_formatter) # tjosa(은/는)
 
 사용자 지정 포맷터 함수를 만들 때 준수해야 하는 함수 프로토콜 입니다.
 
+`candidates` 인자에는 가능한 모든 조사 후보들이 들어있으며, 우선 순위별로 정렬되어 있습니다.
+
+이러한 후보들의 몇 개를 병기한 문자열을 반환해야 하며, `candidates`의 일부만 사용할 경우에는 앞에 있는 것을 우선 사용해야 합니다.
+
 ##### format_fallback
 
 `format_fallback(*candidates: str) -> str`
