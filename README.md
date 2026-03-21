@@ -93,10 +93,10 @@ custom_josa_map_exclusive = create_conversion_map([e_da])
 custom_josa_map_extended = create_conversion_map([*josa_rules, e_da])
 
 word = '조사'
-josa(t'{word}이다', conversion_rules=custom_josa_map_exclusive) # 조사다
+print(josa(t'{word}이다', conversion_rules=custom_josa_map_exclusive)) # 조사다
 
 word = '한글'
-josa(t'{word}이다', conversion_rules=custom_josa_map_extended) # 한글이다
+print(josa(t'{word}이다', conversion_rules=custom_josa_map_extended)) # 한글이다
 ```
 
 #### tjosa.mappings 모듈
@@ -174,7 +174,7 @@ def custom_formatter(*candidates: str) -> str:
     return f'({candidates[0]}/{candidates[1]})'
 
 word = 'tjosa'
-josa(t'{word}는 좋다.', fallback_formatter=custom_formatter) # tjosa(은/는) 좋다.
+print(josa(t'{word}는 좋다.', fallback_formatter=custom_formatter)) # tjosa(은/는) 좋다.
 ```
 
 #### tjosa.formatter 모듈
