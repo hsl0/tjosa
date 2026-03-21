@@ -1,5 +1,7 @@
-from tjosa.mappings import create_conversion_map
+"""tjosa.mappings 모듈 테스트"""
+
 from unittest.mock import MagicMock
+from tjosa.mappings import create_conversion_map
 
 
 def create_conversion_rule_mock(*candidates: str):
