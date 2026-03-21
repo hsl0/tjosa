@@ -4,6 +4,10 @@ Python 3.14 이상 필요
 """
 
 from sys import version_info
+from typing import TYPE_CHECKING
+from .rules import ConversionRule
+from .formatter import FallbackFormatter, format_fallback
+from .mappings import ConversionMap, josa_map
 
 if version_info.major != 3 or version_info.minor < 14:
     raise ImportError(
@@ -11,14 +15,12 @@ if version_info.major != 3 or version_info.minor < 14:
             현재 Python 버전은 {version_info.major}.{version_info.minor} 입니다."
     )
 
-from string.templatelib import Template
-from .rules import ConversionRule
-from .formatter import FallbackFormatter, format_fallback
-from .mappings import ConversionMap, josa_map
+if TYPE_CHECKING:
+    from string.templatelib import Template
 
 
 def josa[T: str, F: str](
-    template: Template,
+    template: Template,  # pylint: disable=used-before-assignment
     *,
     conversion_rules: ConversionMap[T] = josa_map,
     fallback_formatter: FallbackFormatter[F] = format_fallback,

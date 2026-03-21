@@ -3,12 +3,12 @@ name: Pylint
 on:
   push:
     paths:
-      - "*.py"
+      - "tjosa/**.py"
       - test/*.py
       - .github/workflows/pylint.yml
   pull_request:
     paths:
-      - "*.py"
+      - "tjosa/**.py"
       - test/*.py
       - .github/workflows/pylint.yml
   workflow_call:
@@ -37,4 +37,4 @@ jobs:
         pip install -e .
     - name: Analysing the code with pylint
       run: |
-        pylint *.py test/*.py
+        pylint tjosa/**.py test/*.py
