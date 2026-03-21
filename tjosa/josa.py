@@ -27,8 +27,8 @@ def josa[T: str, F: str](
 
     Args:
         template (Template): 템플릿 문자열 (t-string)
-        conversion_rules (dict[T, ConversionRule[T]]): 사용자 지정 변환 규칙
-        fallback_formatter (FallbackFormatter[U]): 판정 불가 시 폴백 포맷터 함수
+        conversion_rules (ConversionMap[str]): 사용자 지정 변환 규칙
+        fallback_formatter (FallbackFormatter[str]): 판정 불가 시 대신 반환할 조사의 포맷터 함수
 
     Returns:
         str: 조사를 변환한 문자열

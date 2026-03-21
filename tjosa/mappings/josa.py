@@ -1,9 +1,12 @@
+"""기본 조사 데이터"""
+
 from typing import Literal, Iterable
 from ..rules import JongsungRule, JongsungExceptRieulRule, ConversionRule
 from .ConversionMap import create_conversion_map
 
 __all__ = ["josa_map", "josa_rules", "BuiltinJosa"]
 
+# 기본 조사 문자열 타입
 type BuiltinJosa = Literal[
     "은",
     "는",
@@ -21,7 +24,7 @@ type BuiltinJosa = Literal[
     "가 ",
 ]
 
-# 기본 조사 매핑
+# 기본 조사 규칙
 josa_rules: Iterable[ConversionRule[BuiltinJosa]] = [  # (받침 있음, 받침 없음)
     # 참조: 국립국어원 표준국어대사전 (CC BY-SA 2.0 KR)
     # 은 (4): [조사] 받침 있는 체언이나 부사어, 합성 동사의 선행 요소 따위의 뒤에 붙어
@@ -47,4 +50,5 @@ josa_rules: Iterable[ConversionRule[BuiltinJosa]] = [  # (받침 있음, 받침 
     JongsungRule[Literal["이", ""]]("이", ""),  # type: ignore
 ]
 
+# 기본 조사 매핑
 josa_map = create_conversion_map(josa_rules)

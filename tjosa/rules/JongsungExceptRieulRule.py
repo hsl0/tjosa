@@ -5,6 +5,10 @@ __all__ = ["JongsungExceptRieulRule"]
 
 
 class JongsungExceptRieulRule[T: str](JongsungRule[T]):
+    """단어의 마지막 음절의 종성 존재 여부를 바탕으로 적절한 조사를 선택하는 변환 규칙
+
+    단, 종성이 'ㄹ'일 경우에는 종성이 존재하지 않는 것으로 간주함."""
+
     def choose[F: str](
         self, word: str, *, fallback_formatter: FallbackFormatter[F] = format_fallback
     ):

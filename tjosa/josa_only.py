@@ -23,7 +23,9 @@ def josa_only[C: str, K: str, F: str](
 
     Args:
         cheon (str): 체언
-        josa (ConversionRule | BuiltinJosa): 조사
+        josa (ConversionRule[str] | BuiltinJosa | str): 조사
+        conversion_rules (ConversionMap[str]): 사용자 지정 변환 규칙
+        fallback_formatter (FallbackFormatter[str]): 판정 불가 시 대신 반환할 조사의 포맷터 함수
 
     Returns:
         str: 체언에 맞게 변환된 조사
