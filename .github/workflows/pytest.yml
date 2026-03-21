@@ -6,12 +6,12 @@ name: Test python package with pytest
 on:
   push:
     paths:
-      - "*.py"
+      - "tjosa/**.py"
       - test/*.py
       - .github/workflows/pytest.yml
   pull_request:
     paths:
-      - "*.py"
+      - "tjosa/**.py"
       - test/*.py
       - .github/workflows/pytest.yml
   workflow_call:

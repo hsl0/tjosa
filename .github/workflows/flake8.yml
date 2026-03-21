@@ -6,12 +6,12 @@ name: Check python package with flake8
 on:
   push:
     paths:
-      - "*.py"
+      - "tjosa/**.py"
       - test/*.py
       - .github/workflows/flake8.yml
   pull_request:
     paths:
-      - "*.py"
+      - "tjosa/**.py"
       - test/*.py
       - .github/workflows/flake8.yml
   workflow_call:
