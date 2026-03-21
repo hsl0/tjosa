@@ -16,15 +16,15 @@ pip install tjosa
 
 ## 지원 조사
 
-- 은/는
-- 이/가
-- 을/를
-- 과/와
-- 으로/로
-- 아/야
-- 이/
-  - 이랑/랑
-  - 이며/며
+- [은](https://stdict.korean.go.kr/search/searchView.do?word_no=467516&searchKeywordTo=3)/[는](https://stdict.korean.go.kr/search/searchView.do?word_no=406525&searchKeywordTo=3)
+- [이](https://stdict.korean.go.kr/search/searchView.do?word_no=471254&searchKeywordTo=3)/[가](https://stdict.korean.go.kr/search/searchView.do?word_no=382734&searchKeywordTo=3)
+- [을](https://stdict.korean.go.kr/search/searchView.do?word_no=469161&searchKeywordTo=3)/[를](https://stdict.korean.go.kr/search/searchView.do?word_no=421993&searchKeywordTo=3)
+- [과](https://stdict.korean.go.kr/search/searchView.do?word_no=398563&searchKeywordTo=3)/[와](https://stdict.korean.go.kr/search/searchView.do?word_no=249573&searchKeywordTo=3)
+- [으로](https://stdict.korean.go.kr/search/searchView.do?word_no=473314&searchKeywordTo=3)/[로](https://stdict.korean.go.kr/search/searchView.do?word_no=421619&searchKeywordTo=3)
+- [아](https://stdict.korean.go.kr/search/searchView.do?word_no=216454&searchKeywordTo=3)/[야](https://stdict.korean.go.kr/search/searchView.do?word_no=220409&searchKeywordTo=3)
+- [이](https://stdict.korean.go.kr/search/searchView.do?word_no=267418&searchKeywordTo=3)/
+  - [이랑](https://stdict.korean.go.kr/search/searchView.do?word_no=469683&searchKeywordTo=3)/[랑](https://stdict.korean.go.kr/search/searchView.do?word_no=100236&searchKeywordTo=3)
+  - [이며](https://stdict.korean.go.kr/search/searchView.do?word_no=260127&searchKeywordTo=3)/[며](https://stdict.korean.go.kr/search/searchView.do?word_no=425032&searchKeywordTo=3)
   - 이다/다
   - 이가/가
 
