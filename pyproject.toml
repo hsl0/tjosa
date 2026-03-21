@@ -66,3 +66,7 @@ disable = [
 [tool.flake8]
 filename = "*.py, tjosa/*.py, test/*.py"
 exclude = ".*/**"
+max-line-length = 100
+
+[tool.black]
+line-length = 100
