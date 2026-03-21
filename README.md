@@ -163,6 +163,40 @@ josa(t'{word}이다', conversion_rules=custom_josa_map_extended) # 한글이다
 
 `with_jongsung` 인자에 'ㄹ'이 아닌 종성이 있을 때 사용할 조사를, `without_jongsung` 인자에 종성이 없거나 'ㄹ' 받침이 있을 때 사용할 조사를 입력합니다.
 
+### 사용자 지정 포맷터
+
+한글이 아닌 등 조사를 판별할 수 없을 때 `이(가)` 또는 `(이)`와 같이 조사 중 하나를 괄호에 넣고 둘을 병기합니다. 하지만 `FallbackFormatter` 인터페이스를 구현한 폴백 포맷터 함수를 직접 만들고 `josa()` 함수나 `josa_only()` 함수의 `fallback_formatter` 인자에 넣어 형식을 바꿀 수 있습니다.
+
+```py
+from tjosa import josa
+
+def custom_formatter(*candidates: str) -> str:
+    return f'({candidates[0]}/{candidates[1]})'
+
+word = 'tjosa'
+josa(t'{word}는 좋다.', fallback_formatter=custom_formatter) # tjosa(은/는) 좋다.
+```
+
+#### tjosa.formatter 모듈
+
+##### FallbackFormatter
+
+`(*candidates: str) -> str`
+
+사용자 지정 포맷터 함수를 만들 때 준수해야 하는 함수 프로토콜 입니다.
+
+##### format_fallback
+
+`format_fallback(*candidates: str) -> str`
+
+한글이 아닌 등 조사를 판별할 수 없을 때 `이(가)` 또는 `(이)`와 같이 조사 중 하나를 괄호에 넣고 둘을 병기합니다. 기본적으로 사용되는 `FallbackFormatter` 함수입니다.
+
+한 가지 종류의 조사가 들어오면 그 조사를 괄호에 넣습니다. (예: `(이)`)
+
+두 가지 종류의 조사가 들어오면 첫번째 조사는 그대로 표시하고, 두번째 조사는 괄호에 넣어 병기합니다. (예: `이(가)`)
+
+만약 세 가지 이상의 조사가 들어오면 두 가지 종류의 조사가 들어올 때와 같이 표시되며, 세번째 이후의 조사는 무시됩니다.
+
 ## 성능 비교 (Performance)
 
 `tjosa`는 한 단어 조사 선택(`josa_only`)과 문장 전체 문자열 변환(`josa`) 사용 방식 모두에서 유사 라이브러리 대비 빠른 성능을 보입니다.
