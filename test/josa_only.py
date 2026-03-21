@@ -3,6 +3,7 @@
 from tjosa import josa_only
 from tjosa.rules import JongsungRule
 
+
 def test_english():
     '''영어 사용 테스트'''
     assert josa_only("Test", "가") == "이(가)"
