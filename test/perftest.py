@@ -175,6 +175,7 @@ def myevan_pyjosa():
     return {'choose_josa': choose_josa, 'replace_josa': replace_josa}
 # pylint: enable=invalid-name
 
+
 @pytest.mark.replace
 def test_myevan_pyjosa_replace_josa(benchmark):
     '''myevan/pyjosa.replcae_josa 테스트'''
