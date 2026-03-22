@@ -24,16 +24,16 @@
 문장 전체 조사 변환 함수
 
 - hsl0/tjosa.josa
-- [myevan/pyjosa](github.com/myevan/pyjosa).replace_josa
+- [myevan/pyjosa](https://github.com/myevan/pyjosa).replace_josa
 
 ### Select 그룹
 
 단일 단어 조사 판별 함수
 
 - hsl0/tjosa.josa_only
-- [kimsewhan96/pyjosa](github.com/kimsewhan96/pyjosa).get_josa 1.0.3
-- [hyunwoongko/kss](github.com/hyunwoongko/kss).select_josa 6.0.6
-- [what-studio/tossi](what-studio/tossi).pick 0.3.1
+- [kimsewhan96/pyjosa](https://github.com/kimsewhan96/pyjosa).get_josa 1.0.3
+- [hyunwoongko/kss](https://github.com/hyunwoongko/kss).select_josa 6.0.6
+- [what-studio/tossi](https://github.com/what-studio/tossi).pick 0.3.1
 
 ## 결과
 
