@@ -1,6 +1,6 @@
 # 조사 처리 라이브러리 비교 벤치마크
 
-시행일: 2026-03-15  
+시행일: 2026-03-22
 환경: Windows / Python 3.14.3 / pytest-benchmark 5.2.3
 
 ## 측정 방법
@@ -41,8 +41,8 @@
 
 | 테스트 | Mean(avg) μs | Run variation μs | Range (min~max) μs | Fastest wins |
 |---|---:|---:|---:|---:|
-| test_tjosa_josa | 32.1564 | 0.7686 | 31.2007 ~ 33.7886 | 10/10 |
-| test_myevan_pyjosa_replace_josa | 37.2463 | 3.9454 | 34.5226 ~ 48.8489 | 0/10 |
+| test_tjosa_josa | 33.7467 | 0.9618 | 32.4345 ~ 35.3948 | 8/10 |
+| test_myevan_pyjosa_replace_josa | 35.5697 | 1.0421 | 34.5382 ~ 38.2177 | 2/10 |
 
 #### `hsl0/tjosa.josa` vs `myevan/pyjosa.replace_josa`
 
@@ -50,15 +50,15 @@
   ($\mu_{a} - \mu_{b} \ge 0$)
 - 대립가설 H1: `hsl0/tjosa.josa`는 `myevan/pyjosa.replace_josa`보다 빠르다.
   ($\mu_{a} - \mu_{b} \lt 0$)
-- 평균 차이: **-5.0899 μs** (`hsl0/tjosa.josa`가 빠름)
-- 상대 차이: **-13.67%**
-- 런별 승패: `hsl0/tjosa.josa` 빠름 **10/10**, 느림 **0/10**
+- 평균 차이: **-1.8230 μs** (`hsl0/tjosa.josa`가 빠름)
+- 상대 차이: **-5.13%**
+- 런별 승패: `hsl0/tjosa.josa` 빠름 **8/10**, 느림 **2/10**
 - 정규성(Shapiro-Wilk):
-  - `hsl0/tjosa.josa` p=**0.349639**
-  - `myevan/pyjosa.replace_josa` p=**0.000015**
-  - 차이값 D p=**0.000005** → 정규성 가정 불충족
-- 검정 p-value (단측 Wilcoxon signed-rank): **0.0009765625**
-- 참고 p-value (단측 paired t-test): **0.0010413585**
+  - `hsl0/tjosa.josa` p=**0.665123**
+  - `myevan/pyjosa.replace_josa` p=**0.010191**
+  - 차이값 D p=**0.335273** → 정규성 가정 충족
+- 검정 p-value (단측 paired t-test): **0.0026876196**
+- 참고 p-value (단측 Wilcoxon signed-rank): **0.0048828125**
 - 가설 판정(α=0.05): **H0 기각, H1 채택**
 
 문장 전체 조사 변환 유즈케이스에서는 `hsl0/tjosa.josa`가 통계적으로 유의하게 우세.
@@ -69,10 +69,10 @@
 
 | 테스트 | Mean(avg) μs | Run variation μs | Range (min~max) μs |
 |---|---:|---:|---:|
-| test_tjosa_josa_only | 8.9497 | 0.4107 | 8.3563 ~ 9.8005 |
-| test_kimsewhan96_pyjosa_get_josa | 26.0833 | 1.5565 | 24.4292 ~ 29.1648 |
-| test_tossi_pick | 78.8639 | 3.1455 | 75.5816 ~ 86.0720 |
-| test_kss_select_josa | 111.0664 | 6.6469 | 103.8600 ~ 126.9704 |
+| test_tjosa_josa_only | 11.6421 | 0.6697 | 10.6795 ~ 12.8821 |
+| test_kimsewhan96_pyjosa_get_josa | 27.6061 | 2.5265 | 24.5777 ~ 31.0733 |
+| test_tossi_pick | 102.6896 | 44.4822 | 74.8827 ~ 195.5604 |
+| test_kss_select_josa | 165.3719 | 78.3831 | 113.6830 ~ 288.7018 |
 
 #### `hsl0/tjosa.josa_only` vs `kimsewhan96/pyjosa.get_josa`
 
@@ -80,14 +80,14 @@
   ($\mu_{a} - \mu_{b} \ge 0$)
 - 대립가설 H1: `hsl0/tjosa.josa_only`는 `kimsewhan96/pyjosa.get_josa`보다 빠르다.
   ($\mu_{a} - \mu_{b} \lt 0$)
-- 평균 차이: **-17.1335 μs** (`hsl0/tjosa.josa_only`가 빠름)
-- 상대 차이: **-65.69%**
+- 평균 차이: **-15.9640 μs** (`hsl0/tjosa.josa_only`가 빠름)
+- 상대 차이: **-57.83%**
 - 런별 승패: `hsl0/tjosa.josa_only` 빠름 **10/10**
 - 정규성(Shapiro-Wilk):
-  - `hsl0/tjosa.josa_only` p=**0.734057**
-  - `kimsewhan96/pyjosa.get_josa` p=**0.130141**
-  - 차이값 D p=**0.598621** → 정규성 가정 충족
-- 검정 p-value (단측 paired t-test): **0.0000000001**
+  - `hsl0/tjosa.josa_only` p=**0.798318**
+  - `kimsewhan96/pyjosa.get_josa` p=**0.130516**
+  - 차이값 D p=**0.168280** → 정규성 가정 충족
+- 검정 p-value (단측 paired t-test): **0.0000000062**
 - 참고 p-value (단측 Wilcoxon signed-rank): **0.0009765625**
 - 가설 판정(α=0.05): **H0 기각, H1 채택**
 
@@ -96,15 +96,9 @@
 ## 종합 결론
 
 - `tjosa`는 기능 분리 관점에서 성능 포지션이 명확하다.
-  - **조사 선택 전용(`josa_only`)**: 최상위권 성능 (이번 측정에선 `pyjosa` 대비 큰 폭 우세)
-  - **문자열 치환 포함(`josa`)**: `replace` 조건(현재 비교군 `myevan`)에서 비모수 1차 검정 기준 통계적으로 유의한 우세
+  - **조사 선택 전용(`josa_only`)**: 최상위권 성능 (이번 측정에선 `kimsewhan96/pyjosa` 대비 큰 폭 우세)
+  - **문자열 치환 포함(`josa`)**: `replace` 조건(현재 비교군 `myevan/pyjosa`)에서 paired t-test 기준 통계적으로 유의한 우세
 - 두 핵심 비교쌍 모두에서 귀무가설(H0)을 기각했고, `tjosa`가 더 빠르다는 대립가설(H1)을 채택했다.
-
-## 비고
-
-- 본 보고서는 비교군 구성이 업데이트된 시점의 최신 재측정 결과를 반영한다.
-- `replace`는 전체 문자열 변환 API끼리의 비교를 우선한다.
-- `select`는 조사 선택 엔진 성능 비교 지표로 분리 해석한다.
 
 ## 주의사항
 
