@@ -27,7 +27,7 @@ Changelog = "https://github.com/hsl0/tjosa/releases"
 [project.optional-dependencies]
 dev = [
   "build >=1.4.0, <2",
-  "twine >=6.2.0, <7",
+  "twine >=6.2.0, <8",
   "pytest>=9.0.0,<10",
   "pytest-cov>=7.0.0,<8",
   "pylint>=3.3.0",
